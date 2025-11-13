@@ -24,13 +24,13 @@
                         <label>Kode Akun 1</label>
                         <select class="form-control" name="kode_akun1">
                             <?php foreach ($dtakun1 as $key => $value): ?>
-                                <option value="<?= $value->kode_akun1 ?>" <?= $dtakun3->kode_akun1 ==  $value->kode_akun1 ? 'selected' : null ?>><?= $value->nama_akun1 ?></option>
+                                <option value="<?= $value->id_akun1 ?>" <?= $dtakun3->kode_akun1 ==  $value->id_akun1 ? 'selected' : null ?>><?= $value->nama_akun1 ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Kode Akun 1</label>
-                        <select class="form-control" name="kode_akun1">
+                        <label>Kode Akun 2</label>
+                        <select class="form-control" name="kode_akun2">
                             <?php foreach ($dtakun2 as $key => $value): ?>
                                 <option value="<?= $value->kode_akun2 ?>" <?= $dtakun3->kode_akun2 ==  $value->kode_akun2 ? 'selected' : null ?>><?= $value->nama_akun2 ?></option>
                             <?php endforeach; ?>

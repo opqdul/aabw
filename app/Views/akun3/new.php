@@ -22,7 +22,7 @@
                         <label>Kode Akun 1</label>
                         <select class="form-control" name="kode_akun1">
                             <?php foreach ($dtakun1 as $key => $value): ?>
-                                <option value="<?= $value->kode_akun1 ?>"><?= $value->nama_akun1 ?></option>
+                                <option value="<?= $value->id_akun1 ?>"><?= $value->nama_akun1 ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
