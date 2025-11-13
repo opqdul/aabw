@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CodeIgniter 4 Accounting Application",
   "scripts": {
-    "install-template": "cd public/template && npm install",
+    "install-template": "cd public/template && npm install --legacy-peer-deps",
     "postinstall": "npm run install-template"
   },
   "repository": {
