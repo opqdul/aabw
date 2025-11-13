@@ -1,43 +1,208 @@
-# CodeIgniter 4 Application Starter
+# AABW - CodeIgniter 4 Accounting Application
 
-## What is CodeIgniter?
+A simple accounting management system built with CodeIgniter 4, featuring a three-level account hierarchy (Akun1, Akun2, Akun3).
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Features
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- 📊 Three-level chart of accounts management
+- 💼 Account categories: Assets, Liabilities, Equity, Revenue, Expenses
+- 🎨 Modern UI using Stisla template
+- 📱 Responsive design with Bootstrap & DataTables
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Requirements
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- PHP 8.1 or higher
+- MySQL 5.7 or higher
+- Composer
+- Required PHP extensions:
+  - `intl` (International)
+  - `mbstring` (Multibyte String)
+  - `mysqli` (MySQL Improved)
 
-## Installation & updates
+## Installation
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+### 1. Clone the Repository
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+```bash
+git clone https://github.com/opqdul/aabw2.git
+cd aabw2
+```
 
-## Setup
+### 2. Install Dependencies
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+```bash
+composer install
+```
 
-## Important Change with index.php
+### 3. Configure Environment
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Copy the `.env` file and update the database credentials:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+```bash
+# The .env file already exists, just edit it
+```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Edit `.env` file:
+
+```env
+CI_ENVIRONMENT = development
+
+app.baseURL = 'http://localhost:8080/'
+
+database.default.hostname = localhost
+database.default.database = aabw_db
+database.default.username = root
+database.default.password = your_password
+database.default.DBDriver = MySQLi
+```
+
+### 4. Enable PHP Extensions
+
+Make sure the following extensions are enabled in your `php.ini`:
+
+```ini
+extension=intl
+extension=mbstring
+extension=mysqli
+```
+
+To find your `php.ini` location, run:
+
+```bash
+php --ini
+```
+
+### 5. Create Database
+
+Create a new MySQL database:
+
+```sql
+CREATE DATABASE aabw_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+Or using command line:
+
+```bash
+mysql -u root -p -e "CREATE DATABASE aabw_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+```
+
+### 6. Run Migrations
+
+Run the database migrations to create tables:
+
+```bash
+php spark migrate
+```
+
+This will create the following tables:
+- `akun1s` - Level 1 accounts (main categories)
+- `akun2s` - Level 2 accounts (sub-categories)
+- `akun3s` - Level 3 accounts (detail accounts)
+
+### 7. Seed Initial Data (Optional)
+
+If you have a SQL dump file, import it:
+
+```bash
+mysql -u root -p aabw_db < aabw.sql
+```
+
+### 8. Start Development Server
+
+```bash
+php spark serve
+```
+
+The application will be available at: **http://localhost:8080**
+
+## Project Structure
+
+```
+app/
+├── Controllers/
+│   ├── Akun1.php       # Level 1 accounts controller
+│   ├── Akun2.php       # Level 2 accounts controller
+│   └── Akun3.php       # Level 3 accounts controller
+├── Models/
+│   ├── ModelAkun2.php
+│   └── ModelAkun3.php
+├── Views/
+│   ├── akun1/
+│   ├── akun2/
+│   ├── akun3/
+│   └── layout/
+└── Database/
+    └── Migrations/      # Database migration files
+```
+
+## Database Schema
+
+### Level 1 Accounts (akun1s)
+- Assets (Aktiva)
+- Liabilities (Kewajiban)
+- Equity (Modal)
+- Revenue (Pendapatan)
+- Expenses (Beban)
+
+### Relationships
+- Akun2 belongs to Akun1 (one-to-many)
+- Akun3 belongs to Akun2 and Akun1 (many-to-one)
+
+## Troubleshooting
+
+### PHP Intl Extension Error
+
+If you get "Class 'Locale' not found" error:
+
+1. Find your `php.ini` file: `php --ini`
+2. Uncomment or add: `extension=intl`
+3. Set correct extension directory if needed
+4. Restart your server
+
+### Foreign Key Constraint Error
+
+If you get foreign key constraint errors, make sure:
+- Parent records exist before creating child records
+- Migration order is correct (Akun1 → Akun2 → Akun3)
+
+### Database Connection Failed
+
+Check your `.env` file:
+- Verify database credentials are correct
+- Ensure MySQL service is running
+- Database name matches the one you created
+
+## Tech Stack
+
+- **Framework**: CodeIgniter 4.6.3
+- **PHP**: 8.1+
+- **Database**: MySQL/MariaDB
+- **Frontend**: 
+  - Bootstrap 4
+  - DataTables
+  - Font Awesome
+  - Stisla Admin Template
+
+## Contributing
+
+Feel free to submit issues and pull requests.
+
+## License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
+
+## Credits
+
+- [CodeIgniter 4](https://codeigniter.com/)
+- [Stisla Template](https://github.com/stisla/stisla)
+
+## Support
+
+For questions and support, please open an issue in the repository.
+
+---
+
+Made with ❤️ using CodeIgniter 4
 
 ## Repository Management
 
