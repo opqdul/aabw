@@ -192,7 +192,13 @@ If you get 404 errors for CSS/JS files like:
 - `GET http://localhost:8080//template/node_modules/bootstrap/dist/css/bootstrap.min.css 404`
 - `jQuery is not defined`
 
-**Solution**: Install the npm dependencies:
+**Solution**: Install the npm dependencies from the root directory:
+
+```bash
+npm install
+```
+
+Or manually:
 
 ```bash
 cd public/template
