@@ -14,6 +14,7 @@ A simple accounting management system built with CodeIgniter 4, featuring a thre
 - PHP 8.1 or higher
 - MySQL 5.7 or higher
 - Composer
+- Node.js & npm (for frontend assets)
 - Required PHP extensions:
   - `intl` (International)
   - `mbstring` (Multibyte String)
@@ -28,18 +29,53 @@ git clone https://github.com/opqdul/aabw2.git
 cd aabw2
 ```
 
-### 2. Install Dependencies
+### 2. Install PHP Dependencies
 
 ```bash
 composer install
 ```
 
-### 3. Configure Environment
+### 3. Install Frontend Dependencies
 
-Copy the `.env` file and update the database credentials:
+The Stisla template requires npm packages for Bootstrap, DataTables, jQuery, etc.
+
+**Option 1 - Automatic (Recommended):**
 
 ```bash
-# The .env file already exists, just edit it
+npm install
+```
+
+This will automatically install all frontend dependencies in `public/template/`.
+
+**Option 2 - Manual:**
+
+```bash
+cd public/template
+npm install
+cd ../..
+```
+
+Or using yarn:
+
+```bash
+cd public/template
+yarn install
+cd ../..
+```
+
+### 4. Configure Environment
+
+Copy the `.env.example` file to `.env` and update the database credentials:
+
+```bash
+# Copy the example file
+cp .env.example .env
+```
+
+Or on Windows:
+
+```bash
+copy .env.example .env
 ```
 
 Edit `.env` file:
@@ -149,6 +185,22 @@ app/
 - Akun3 belongs to Akun2 and Akun1 (many-to-one)
 
 ## Troubleshooting
+
+### Missing Frontend Assets (Bootstrap, jQuery, etc.)
+
+If you get 404 errors for CSS/JS files like:
+- `GET http://localhost:8080//template/node_modules/bootstrap/dist/css/bootstrap.min.css 404`
+- `jQuery is not defined`
+
+**Solution**: Install the npm dependencies:
+
+```bash
+cd public/template
+npm install
+cd ../..
+```
+
+Then restart your server.
 
 ### PHP Intl Extension Error
 

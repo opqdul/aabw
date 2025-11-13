@@ -1,0 +1,21 @@
+{
+  "name": "aabw",
+  "version": "1.0.0",
+  "description": "CodeIgniter 4 Accounting Application",
+  "scripts": {
+    "install-template": "cd public/template && npm install",
+    "postinstall": "npm run install-template"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opqdul/aabw2.git"
+  },
+  "keywords": [
+    "codeigniter4",
+    "accounting",
+    "php",
+    "stisla"
+  ],
+  "author": "",
+  "license": "MIT"
+}
